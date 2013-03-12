@@ -14,6 +14,9 @@ of interest. For example, you can execute a search to return just the
 name and IP addresses of the nodes in your infrastructure rather than
 receiving an array of complete node objects and post-processing them.
 
+Finally, both the `search` and `partial_search` methods allow you to
+cache results to avoid repetitive queries for the same search terms.
+
 Install
 =======
 
@@ -27,7 +30,7 @@ When you call `partial_search`, you need to specify the key paths of the
 attributes you want returned. Key paths are specified as an array
 of strings. Each key path is mapped to a short name of your
 choosing. Consider the following example:
-   
+
     partial_search(:node, 'role:web',
        :keys => { 'name' => [ 'name' ],
                   'ip'   => [ 'ipaddress' ],
@@ -43,6 +46,14 @@ In the example above, two attributes will be extracted (on the
 server) from the nodes that match the search query. The result will
 be a simple hash with keys 'name'  and 'ip'.
 
+The `:cache` option allows you to retrieve cached search results if available.
+If an identical query was already issued during the current Chef run, its
+results will be immediately returned, thereby avoiding an unnecessary
+round-trip to the server.  For example:
+
+   partial_search(:node, 'role:web', :cache => true,
+                  :keys => ... )
+
 Notes
 =====
 
@@ -55,6 +66,3 @@ Notes
 
 * The partial search API is available in Opscode Private Chef since
   1.2.2
-
-
-   
