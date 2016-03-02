@@ -14,6 +14,12 @@ of interest. For example, you can execute a search to return just the
 name and IP addresses of the nodes in your infrastructure rather than
 receiving an array of complete node objects and post-processing them.
 
+DEPRECATION
+===========
+Chef Client 12.0 shipped with the partial_search capability built-in
+so there is no longer a need to use this cookbook.
+
+
 Install
 =======
 
